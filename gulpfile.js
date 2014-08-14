@@ -41,6 +41,9 @@ var AUTOPREFIXER_BROWSERS = [
   'bb >= 10'
 ];
 
+var log = $.util.log
+var red = $.util.colors.red
+
 // // TODO: write the equivalent of dart
 // // Lint JavaScript
 // gulp.task('jshint', function () {
@@ -199,6 +202,14 @@ gulp.task('serve', ['assets'], function () {
     'app/**/*.{dart,js}',
     '!app/{packages,*/packages}/**'], reload);
 
+
+  gulp.watch(['gulpfile.js'], function(evt){
+    if ('changed' === evt.type) {
+      log(red(':: restarting ::'))
+      process.exit(0)
+    }
+  })
+
 });
 
 // Build and serve the output from the dist build
@@ -209,6 +220,9 @@ gulp.task('serve:dist', ['default'], function () {
     // Note: this uses an unsigned certificate which on first access
     //       will present a certificate warning in the browser.
     // https: true,
+    browser: 'skip',
+    // forces full page reload on css changes.
+    injectChanges: false,
     server: {
       baseDir: 'dist'
     }
@@ -226,6 +240,13 @@ gulp.task('serve:dist', ['default'], function () {
     'app/**/*.{dart,js}',
     '!app/{packages,*/packages}/**'], ['build', reload]);
 
+  gulp.watch(['gulpfile.js'], function(evt){
+    if ('changed' === evt.type) {
+      log(red(':: restarting ::'))
+      process.exit(0)
+    }
+  })
+
 });
 
 // Build and serve the output from the dist build
@@ -236,6 +257,9 @@ gulp.task('serve:build', ['default'], function () {
     // Note: this uses an unsigned certificate which on first access
     //       will present a certificate warning in the browser.
     // https: true,
+    browser: 'skip',
+    // forces full page reload on css changes.
+    injectChanges: false,
     server: {
       baseDir: 'build/web'
     }
@@ -251,6 +275,11 @@ gulp.task('build', function(cb){
 gulp.task('default', ['clean'], function(cb){
   runSequence('build', cb)
 })
+
+// // TODO: add comments
+// gulp.task('restart', function () {
+
+// });
 
 // Load custom tasks from the `tasks` directory
 try { require('require-dir')('tasks'); } catch (err) {}
