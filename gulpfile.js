@@ -70,18 +70,27 @@ var AUTOPREFIXER_BROWSERS = [
 // });
 
 // Copy All Files At The Dart Root Level (web)
-gulp.task('copy', function(){
+gulp.task('prebuild', function(){
   return gulp.src([
-    'app/**/*.{html,js,dart,map}',
+    'app/**/*.{html,js,dart,map,jpg,jpeg,png,svg}',
     '.tmp/**/*.{html,css,map}',
     '!app/{packages,*/packages}/**'], {dot:true})
   .pipe(gulp.dest('web'))
-  .pipe($.size({title: 'copy'}))
+  .pipe($.size({title: 'copy:web'}))
+})
+
+gulp.task('copy', function(){
+  return gulp.src('build/web/**/*.{html,js,dart,map,jpg,jpeg,png,svg}', {dot:true})
+  .pipe(gulp.dest('dist'))
+  .pipe($.size({title: 'copy:dist'}))
 })
 
 // TODO: add comments
 gulp.task('minify', function(){
-  return gulp.src('build/**/*.{html,css,js,map}', {dot:true})
+    // return gulp.src('build/web/**/*.{html,css,js,map}', {dot:true})
+  return gulp.src([
+    'build/web/**/*.{html,css,js,map}',
+    '!build/web/{packages,*/packages}/**'], {dot:true})
     // Remove Any Unused CSS
     // Note: If not using the Style Guide, you can delete it from
     // the next line to only include styles your project uses.
@@ -99,12 +108,19 @@ gulp.task('minify', function(){
         minifyJS: true,
         collapseWhitespace: true,
         removeComments:true,
-        removeAttributeQuotes: true
+        // removeAttributeQuotes: true,
+        // polymers conditional attributes assign
+        customAttrAssign: [new RegExp("\\?=")]
+
     })))
     // TODO: uglify crashing. RangeError: Maximum call stack size exceeded
     // .pipe($.if('*.js', $.uglify({preserveComments: 'some'})))
     .pipe(gulp.dest('dist'))
     .pipe($.size({title: 'minify'}))
+})
+
+gulp.task('postbuild', function(cb){
+  runSequence('copy', 'minify', cb)
 })
 
 // Compile and Automatically Prefix Stylesheets
@@ -146,7 +162,7 @@ gulp.task('assets', function(cb){
 gulp.task('clean', del.bind(null, ['web', 'build', '.tmp', 'dist']));
 
 // executing pub build
-gulp.task('build', function(cb){
+gulp.task('build:dart', function(cb){
   var cmd = exec('pub build');
   cmd.stdout.pipe(process.stdout);
   cmd.stderr.pipe(process.stderr);
@@ -157,6 +173,7 @@ gulp.task('build', function(cb){
 gulp.task('serve', ['assets'], function () {
   browserSync({
     notify: false,
+    port: 3001,
     // browser: 'chromium',
     browser: 'skip',
     // forces full page reload on css changes.
@@ -193,14 +210,46 @@ gulp.task('serve:dist', ['default'], function () {
     //       will present a certificate warning in the browser.
     // https: true,
     server: {
-      baseDir: 'dist/web'
+      baseDir: 'dist'
+    }
+  });
+
+  gulp.watch([
+    'app/**/*.{jade,html}',
+    '!app/{packages,*/packages}/**'], ['build', reload]);
+
+  gulp.watch([
+    'app/**/*.{scss,css}',
+    '!app/{packages,*/packages}/**'], ['build', reload]);
+
+  gulp.watch([
+    'app/**/*.{dart,js}',
+    '!app/{packages,*/packages}/**'], ['build', reload]);
+
+});
+
+// Build and serve the output from the dist build
+gulp.task('serve:build', ['default'], function () {
+  browserSync({
+    notify: false,
+    // Run as an https by uncommenting 'https: true'
+    // Note: this uses an unsigned certificate which on first access
+    //       will present a certificate warning in the browser.
+    // https: true,
+    server: {
+      baseDir: 'build/web'
     }
   });
 });
 
 // TODO: add comments
+gulp.task('build', function(cb){
+  runSequence('assets', 'prebuild', 'build:dart', 'postbuild', cb)
+})
+
+// TODO: add comments
 gulp.task('default', ['clean'], function(cb){
-  runSequence('assets', 'copy', 'build', 'minify', cb)
+  runSequence('build', cb)
 })
 
 // Load custom tasks from the `tasks` directory

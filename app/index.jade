@@ -7,30 +7,32 @@ html
 
     //- must make this better
     //- for some reason I can't concat both script. there is a bug on safari. at least
-    // build:js platform-min.js
     script(src='packages/web_components/platform.js')
-    // endbuild
-
-    // build:js dart_support-min.js
     script(src='packages/web_components/dart_support.js')
-    // endbuild
+
+    //- polymer paper stuff
+    link(rel='import', href='packages/paper_elements/paper_input.html')
+
 
     //- import the click-counter
-    link(rel='import', href='click_counter/index.html')
+    //- link(rel='import', href='click_counter/index.html')
+    //- link(rel='import', href='click_counter/index.html')
+
+
     script(type='application/dart').
       export 'package:polymer/init.dart';
 
     //- I think there is no need for this.
     //- script(src='packages/browser/dart.js')
 
-    // build:css index-min.css
     link(rel='stylesheet', href='index.css')
-    // endbuild
 
-  body
+  body(unresolved, touch-action="auto")
     h1 Base polymer (jade)
     p Hello world from Dart!
-    #sample_container_id
+
+    paper-input(label="type smth ...")
+    //#sample_container_id
       click-counter(count='5')
 
     // Google Analytics: change UA-XXXXX-X to be your site's ID
