@@ -212,22 +212,7 @@ gulp.task('serve', ['assets'], function () {
 
 });
 
-// Build and serve the output from the dist build
-gulp.task('serve:dist', ['default'], function () {
-  browserSync({
-    notify: false,
-    // Run as an https by uncommenting 'https: true'
-    // Note: this uses an unsigned certificate which on first access
-    //       will present a certificate warning in the browser.
-    // https: true,
-    browser: 'skip',
-    // forces full page reload on css changes.
-    injectChanges: false,
-    server: {
-      baseDir: 'dist'
-    }
-  });
-
+gulp.task('watcher', function(){
   gulp.watch([
     'app/**/*.{jade,html}',
     '!app/{packages,*/packages}/**'], ['build', reload]);
@@ -246,11 +231,30 @@ gulp.task('serve:dist', ['default'], function () {
       process.exit(0)
     }
   })
+})
+
+// Build and serve the output from the dist build
+gulp.task('serve:dist', ['default', 'watcher'], function () {
+  browserSync({
+    notify: false,
+    // Run as an https by uncommenting 'https: true'
+    // Note: this uses an unsigned certificate which on first access
+    //       will present a certificate warning in the browser.
+    // https: true,
+    browser: 'skip',
+    // forces full page reload on css changes.
+    injectChanges: false,
+    server: {
+      baseDir: 'dist'
+    }
+  });
+
+
 
 });
 
 // Build and serve the output from the dist build
-gulp.task('serve:build', ['default'], function () {
+gulp.task('serve:build', ['default', 'watcher'], function () {
   browserSync({
     notify: false,
     // Run as an https by uncommenting 'https: true'
@@ -268,12 +272,12 @@ gulp.task('serve:build', ['default'], function () {
 
 // TODO: add comments
 gulp.task('build', function(cb){
-  runSequence('assets', 'prebuild', 'build:dart', 'postbuild', cb)
+  runSequence('assets', 'prebuild', 'build:dart', cb)
 })
 
 // TODO: add comments
 gulp.task('default', ['clean'], function(cb){
-  runSequence('build', cb)
+  runSequence('build', 'postbuild', cb)
 })
 
 // // TODO: add comments

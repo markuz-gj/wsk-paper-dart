@@ -10,6 +10,7 @@ html
     script(src='packages/web_components/platform.js')
     script(src='packages/web_components/dart_support.js')
 
+
     //- polymer paper stuff
     link(rel='import', href='packages/paper_elements/paper_input.html')
 
@@ -27,6 +28,8 @@ html
     //- without DartVM
     //- script(src='packages/browser/dart.js')
 
+
+
     link(rel='stylesheet', href='index.css')
 
   body(unresolved, touch-action="auto")
@@ -38,12 +41,13 @@ html
 
     click-counter(count='5')
 
-    script(type='application/dart').
-      export 'package:polymer/init.dart';
+
 
 
     //- todo-app
 
+    script(type='application/dart', defer).
+      export 'package:polymer/init.dart';
 
     // Google Analytics: change UA-XXXXX-X to be your site's ID
     // script.

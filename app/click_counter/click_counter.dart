@@ -1,3 +1,6 @@
+library click_counter;
+
+
 import 'package:polymer/polymer.dart';
 
 /**
