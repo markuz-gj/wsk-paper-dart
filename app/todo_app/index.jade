@@ -1,0 +1,13 @@
+link(rel='import', href='../packages/polymer/polymer.html')
+polymer-element(name='todo-app')
+  template
+    //- link(rel='stylesheet', href='todo_app.css')
+
+    h2 Procrastinator's Todo
+    div
+      input#to-do-input(type='text', placeholder="lazy ass")
+
+    div
+      ul#to-do-list
+
+  script(type='application/dart', src='todo_app.dart')

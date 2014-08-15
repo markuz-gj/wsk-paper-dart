@@ -15,14 +15,16 @@ html
 
 
     //- import the click-counter
-    //- link(rel='import', href='click_counter/index.html')
-    //- link(rel='import', href='click_counter/index.html')
+    link(rel='import', href='click_counter/index.html')
+    link(rel='import', href='todo_app/index.html')
 
 
-    script(type='application/dart').
-      export 'package:polymer/init.dart';
+    //- script(type='application/dart', src='index.dart')
 
-    //- I think there is no need for this.
+
+
+    //- uncomment the next tag for dart compilation on the browser.
+    //- without DartVM
     //- script(src='packages/browser/dart.js')
 
     link(rel='stylesheet', href='index.css')
@@ -32,8 +34,16 @@ html
     p Hello world from Dart!
 
     paper-input(label="type smth ...")
-    //#sample_container_id
-      click-counter(count='5')
+    todo-app
+
+    click-counter(count='5')
+
+    script(type='application/dart').
+      export 'package:polymer/init.dart';
+
+
+    //- todo-app
+
 
     // Google Analytics: change UA-XXXXX-X to be your site's ID
     // script.

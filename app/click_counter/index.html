@@ -1,13 +1,10 @@
-<link rel="import" href="packages/polymer/polymer.html">
+<link rel="import" href="../packages/polymer/polymer.html">
 <polymer-element name="click-counter" attributes="count">
   <template>
     <!-- build:css click_counter/click_counter-min.css -->
     <link rel="stylesheet" href="click_counter.css">
     <!-- endbuild -->
 
-    <style>
-
-    </style>
     <div>
       <button on-click="{{increment}}">Click me</button><br>
       <span>(click count: {{count}})</span>

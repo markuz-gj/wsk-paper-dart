@@ -7,8 +7,7 @@ import 'package:polymer/polymer.dart';
 class ClickCounter extends PolymerElement {
   @published int count = 0;
 
-  ClickCounter.created() : super.created() {
-  }
+  ClickCounter.created() : super.created() {}
 
   void increment() {
     count++;
