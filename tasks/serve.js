@@ -41,8 +41,8 @@ var BUILD = CFG.build
 var OPTS = {
   notify: false,
   port: 3000,
-  // browser: 'chromium',
-  browser: 'skip',
+  browser: 'chromium',
+  // browser: 'skip',
   // forces full page reload on css changes.
   injectChanges: false,
   // Run as an https by uncommenting 'https: true'
