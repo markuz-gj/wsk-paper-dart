@@ -1,4 +1,11 @@
-# [![Web Starter Kit](https://cloud.githubusercontent.com/assets/170270/3343034/ceef6e92-f899-11e3-96b9-5d9d69d97a00.png)](https://github.com/google/web-starter-kit/releases/latest)
+#### This is my personal fork from Web Starter Kit. 
+I added [jade](http://jade-lang.com/) templating engine, [Dart](https://www.dartlang.org/) and the Dart port of [paper-elements](http://www.polymer-project.org/docs/elements/paper-elements.html)
+
+##### This project isn't supported by Google and not all information in this document is up to date. 
+
+---
+
+# [![Web Starter Kit](https://cloud.githubusercontent.com/assets/170270/3343034/ceef6e92-f899-11e3-96b9-5d9d69d97a00.png)]()
 
 ## Overview
 
@@ -8,16 +15,22 @@
 
 ## Quickstart
 
-[Download](https://github.com/google/web-starter-kit/releases/latest) the kit or clone this repository and build on what we include in the `app` directory.
+~~[Download]()~~ the kit or clone this repository and build on what we include in the `app` directory.
 
-We provide 2 HTML starting points, from which you can choose:
+~~We provide 2 HTML starting points, from which you can choose:~~
 
-- `index.html` - the default starting point, containing layout and a slide-out menu
-- `basic.html` - includes no layout
+- ~~`index.html` - the default starting point, containing layout and a slide-out menu~~
+- ~~`basic.html` - includes no layout~~
 
 ## Tooling
 
-If you would like to use the optional tooling we provide, make sure your system has [Node.js](http://nodejs.org), [Ruby](https://www.ruby-lang.org/), [gulp.js](http://gulpjs.com) and [Sass](http://sass-lang.com/install) installed.
+If you would like to use the optional tooling we provide, make sure your system has [Dart](https://www.dartlang.org/), [Dartium](https://www.dartlang.org/tools/dartium/), [Node.js](http://nodejs.org), [Ruby](https://www.ruby-lang.org/), [gulp.js](http://gulpjs.com) and [Sass](http://sass-lang.com/install) installed.
+
+### Dart and Dartium
+
+Let's check to see if you already have Dart installed. Bring up a terminal and type `dart --version`. If Dart responds, and if it shows a version at or above v1.5.x, proceed to checking if you have Node installed too. If you require Dart, go to [dartlang.org](https://www.dartlang.org/) and click on the Download Dart + Editor.
+
+You may have make sure `dart`, `dart2js` and `pub` are accessible in you `$PATH`. And that [Dartium](https://www.dartlang.org/tools/dartium/) is installed.
 
 ### Node
 
@@ -54,7 +67,12 @@ You can now use Gulp with the following commands to stay productive during devel
 #### Watch For Changes & Automatically Refresh Across Devices
 
 ```sh
+# only work on dartium
 $ gulp serve
+# serves only the build version
+$ gulp serve:build 
+# serves the build and optmized version
+$ gulp serve:dist
 ```
 
 This outputs an IP address you can use to locally test and another that can be used on devices connected to your network.
@@ -62,44 +80,44 @@ This outputs an IP address you can use to locally test and another that can be u
 ### Build & Optimize
 
 ```sh
-$ gulp
+$ gulp dist
 ```
 
-Build and optimize the current project, ready for deployment. This includes linting as well as image, script, stylesheet and HTML optimization and minification.
+Build and optimize the current project, ready for deployment. This includes ~~linting~~ as well as ~~image~~, ~~script~~, stylesheet and HTML optimization and minification.
 
-#### Performance Insights
+#### ~~Performance Insights~~
 
 ```sh
 $ gulp pagespeed
 ```
 
-Runs the deployed (public) version of your site against the [PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights/) API to help you stay on top of where you can improve.
+~~Runs the deployed (public) version of your site against the [PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights/) API to help you stay on top of where you can improve.~~
 
 ## Web Performance
 
 Web Starter Kit strives to give you a high performance starting point out of the box and we actively work on delivering the best [PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights/) score and frame-rate possible.
 
-In terms of CSS, opting to just use the minimal layout (main.css, h5bp.css) weighs in at ~7KB before modifications are made. Opting to use the Style Guide styles (the default) will take this up to ~39KB. It is your choice which path makes the most sense for your project, however notes on excluding Style Guide styles are in our gulpfile.
+~~In terms of CSS, opting to just use the minimal layout (main.css, h5bp.css) weighs in at ~7KB before modifications are made. Opting to use the Style Guide styles (the default) will take this up to ~39KB. It is your choice which path makes the most sense for your project, however notes on excluding Style Guide styles are in our gulpfile.~~
 
 ## Browser Support
 
 At present, we officially aim to support the following browsers:
 
-* IE10, IE11, IE Mobile 10
+* ~~IE10, IE11, IE Mobile 10~~
 * FF 30, 31
 * Chrome 34, 35
 * Safari 7, 8
-* Opera 23, 24
+* ~~Opera 23, 24~~
 * iOS Safari 7, 8
-* Opera Coast
-* Android / Chrome 4.4, 4.4.3
-* BlackBerry 10
+* ~~Opera Coast~~
+* ~~Android / Chrome 4.4, 4.4.3~~
+* ~~BlackBerry 10~~
 
 This is not to say that Web Starter Kit cannot be used in browsers older than those reflected, but merely that our focus will be on ensuring our layouts work great in the above.
 
-## Troubleshooting
+## ~~Troubleshooting~~
 
-If you find yourself running into issues during installation or running the tools, please check our [Troubleshooting](https://github.com/google/web-starter-kit/wiki/Troubleshooting) guide and then open an [issue](https://github.com/google/web-starter-kit/issues). We would be happy to discuss how they can be solved.
+~~If you find yourself running into issues during installation or running the tools, please check our [Troubleshooting]() guide and then open an [issue](). We would be happy to discuss how they can be solved.~~
 
 ## A Boilerplate-only Option
 
@@ -107,11 +125,11 @@ If you would prefer not to use any of our tooling, delete the following files fr
 
 ## Inspiration
 
-Web Starter Kit is inspired by [Mobile HTML5 Boilerplate](http://html5boilerplate.com/mobile/) and Yeoman's [generator-gulp-webapp](https://github.com/yeoman/generator-gulp-webapp), having taken input from contributors to both projects during development. Our [FAQs](https://github.com/google/web-starter-kit/wiki/FAQ) attempt to answer commonly asked questions about the project.
+Web Starter Kit is inspired by [Mobile HTML5 Boilerplate](http://html5boilerplate.com/mobile/) and Yeoman's [generator-gulp-webapp](https://github.com/yeoman/generator-gulp-webapp), having taken input from contributors to both projects during development. Our [FAQs]() attempt to answer commonly asked questions about the project.
 
 ## Contributing
 
-Contributions, questions and comments are all welcome and encouraged. For code contributions to Web Starter Kit, please see our [Contribution guide](CONTRIBUTING.md) before submitting a pull request. [Website](https://developers.google.com/web/starter-kit/) related issues should be filed on the [Web Fundamentals](https://github.com/google/WebFundamentals/issues/new) issue tracker.
+~~Contributions, questions and comments are all welcome and encouraged. For code contributions to Web Starter Kit, please see our [Contribution guide](CONTRIBUTING.md) before submitting a pull request. [Website]() related issues should be filed on the [Web Fundamentals]) issue tracker.~~
 
 ## License
 

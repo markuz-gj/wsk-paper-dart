@@ -1,12 +1,12 @@
-import 'package:polymer/polymer.dart';
-import 'package:logging/logging.dart';
+// import 'package:polymer/polymer.dart';
+// import 'package:logging/logging.dart';
 
-main() {
+// main() {
 
-  Logger.root.level = Level.ALL;
-  Logger.root.onRecord.listen((rec) {
-    print(rec.message);
-  });
+//   Logger.root.level = Level.ALL;
+//   Logger.root.onRecord.listen((rec) {
+//     print(rec.message);
+//   });
 
-  initPolymer();
-}
+//   initPolymer();
+// }

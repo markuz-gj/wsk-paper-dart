@@ -4,8 +4,8 @@ export PATH=node_modules/.bin:$PATH
 while :;do
 
   gulp $@
-  echo "gulp task exited ($?), sleeping 1s ... \c"
-  sleep 1
+  echo "gulp task exited ($?), sleeping 3s ... \c"
+  sleep 3
   echo
 
 done
