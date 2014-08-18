@@ -1,7 +1,7 @@
 #### This is my personal fork from Web Starter Kit. 
 I added [jade](http://jade-lang.com/) templating engine, [Dart](https://www.dartlang.org/) and the Dart port of [paper-elements](http://www.polymer-project.org/docs/elements/paper-elements.html)
 
-##### This project isn't supported by Google and not all information in this document is up to date. 
+##### This project isn't supported by Google. 
 
 ---
 
