@@ -53,12 +53,18 @@ var DIST = CFG.dist
 var ROOT = CFG.root
 var BUILD = CFG.build
 
+var BASE = path.join(TMP, path.basename(BUILD), path.basename(WEB))
+
 gulp.task('dist', ['clean'], function(cb){
+  runSequence('dist:build', cb)
+})
+
+gulp.task('dist:build', function(cb){
   runSequence('build', 'dist:copy', 'dist:min', cb)
 })
 
 gulp.task('dist:copy', function(){
-  return gulp.src('.tmp/build/web/**/*.{html,js,dart,map,jpg,jpeg,png,svg}', {dot:true})
+  return gulp.src(path.join(BASE, '**/*.{html,js,dart,map,jpg,jpeg,png,svg}'), {dot:true})
   .pipe(gulp.dest(DIST))
   .pipe($.size({title: 'dist:copy'}))
 })
@@ -67,16 +73,16 @@ gulp.task('dist:copy', function(){
 gulp.task('dist:min', function(){
     // return gulp.src('build/web/**/*.{html,css,js,map}', {dot:true})
   return gulp.src([
-    '.tmp/build/web/**/*.{html,css,js,map}',
-    '!.tmp/build/web/**/*.precompiled.js',
-    '!.tmp/build/web/{packages,*/packages}/**'], {dot:true})
+    path.join(BASE, '**/*.{html,css,js,map}'),
+    path.join('!'+ BASE, '**/*.precompiled.js'),
+    path.join('!'+ BASE, '{packages,*/packages}/**')], {dot:true})
     // Remove Any Unused CSS
     // Note: If not using the Style Guide, you can delete it from
     // the next line to only include styles your project uses.
     .pipe($.if('*.css', $.uncss({
       html: [
-        '.tmp/build/web/index.html',
-        '.tmp/build/web/click_counter/index.html',
+        path.join(BASE, 'index.html'),
+        path.join(BASE, 'click_counter/index.html'),
       ],
       // CSS Selectors for UnCSS to ignore
       ignore: []

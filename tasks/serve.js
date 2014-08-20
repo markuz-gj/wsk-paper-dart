@@ -41,7 +41,7 @@ var BUILD = CFG.build
 var OPTS = {
   notify: false,
   port: 3000,
-  browser: 'chromium',
+  // browser: 'chromium',
   // browser: 'skip',
   // forces full page reload on css changes.
   injectChanges: false,
@@ -56,8 +56,8 @@ var OPTS = {
 // Watch Files For Changes & Reload
 gulp.task('serve', ['assets'], function () {
   var opts = OPTS
+  opts.browser = 'chromium'
   opts.server.baseDir = [path.join(TMP, APP), APP]
-
   watch.assets(reload)
   browserSync(opts);
 });

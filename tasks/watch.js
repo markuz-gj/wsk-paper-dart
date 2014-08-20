@@ -18,7 +18,8 @@
  */
 
 'use strict';
-// var exec = require('child_process').exec
+// var exec = require('child_process').execvar
+var join = require('path').join
 
 // Include Gulp & Tools We'll Use
 var gulp = require('gulp');
@@ -28,68 +29,62 @@ var runSequence = require('run-sequence');
 var log = $.util.log;
 var cyan = $.util.colors.cyan;
 
+
+var CFG = require('./config');
+var TMP = CFG.tmp
+var APP = CFG.app
+var WEB = CFG.web
+var DIST = CFG.dist
+var ROOT = CFG.root
+var BUILD = CFG.build
+
 // Watch Files For Changes & reload
+var files = {
+  html:[
+    join(APP, '**/*.{jade,html}'),
+    join('!'+ APP, '{packages,*/packages}/**')
+  ],
+
+  css:[
+    join(APP, '**/*.{scss,sass,css}'),
+    join('!'+ APP, '{packages,*/packages}/**')
+  ],
+
+  js:[
+    join(APP, '**/*.{dart,js}'),
+    join('!'+ APP, '{packages,*/packages}/**')
+  ],
+
+  all: [
+    join(APP, '**/*.{jade,html}'),
+    join(APP, '**/*.{scss,sass,css}'),
+    join(APP, '**/*.{dart,js}'),
+    join('!'+ APP, '{packages,*/packages}/**')
+  ]
+}
 
 function assets (reload) {
   log("Starting '"+ cyan('watch:assets') +"'...")
 
-  gulp.watch([
-    'app/**/*.{jade,html}',
-    '!app/{packages,*/packages}/**'], ['assets:jade/html', reload]);
-
-  gulp.watch([
-    'app/**/*.{scss,css}',
-    '!app/{packages,*/packages}/**'], ['assets:scss/css', reload]);
-
-  gulp.watch([
-    'app/**/*.{dart,js}',
-    '!app/{packages,*/packages}/**'], reload);
+  gulp.watch(files.html, ['assets:jade/html', reload]);
+  gulp.watch(files.css, ['assets:scss/css', reload]);
+  gulp.watch(files.js, reload);
 }
 
 function build (reload){
   log("Starting '"+ cyan('watch:build') +"'...")
 
-  gulp.watch([
-    'app/**/*.{jade,html}',
-    '!app/{packages,*/packages}/**'], function(){
+  gulp.watch(files.all, function(){
       runSequence('build', reload);
     })
-
-  gulp.watch([
-    'app/**/*.{scss,css}',
-    '!app/{packages,*/packages}/**'], function(){
-      runSequence('build', reload);
-    })
-
-  gulp.watch([
-    'app/**/*.{dart,js}',
-    '!app/{packages,*/packages}/**'], function(){
-      runSequence('build', reload);
-    })
-
 }
 
 function dist (reload){
   log("Starting '"+ cyan('watch:dist') +"'...")
 
-  gulp.watch([
-    'app/**/*.{jade,html}',
-    '!app/{packages,*/packages}/**'], function(){
-      runSequence('build', 'dist:copy', 'dist:min', reload);
+  gulp.watch(files.all, function(){
+      runSequence('dist:build', reload);
     })
-
-  gulp.watch([
-    'app/**/*.{scss,css}',
-    '!app/{packages,*/packages}/**'], function(){
-      runSequence('build', 'dist:copy', 'dist:min', reload);
-    })
-
-  gulp.watch([
-    'app/**/*.{dart,js}',
-    '!app/{packages,*/packages}/**'], function(){
-      runSequence('build', 'dist:copy', 'dist:min', reload);
-    })
-
 }
 
 module.exports = {

@@ -46,14 +46,12 @@ var WEB = CFG.web
 
 var DEST = path.join(TMP, APP)
 
-
-
 // Compile and Automatically Prefix Stylesheets
 gulp.task('assets:scss/css', function () {
   // For best performance, don't add Sass partials to `gulp.src`
   return gulp.src([
-      'app/**/*.{scss,css}',
-      '!app/{packages,*/packages}/**'
+      path.join(APP, '**/*.{scss,css}'),
+      path.join('!'+ APP, '{packages,*/packages}/**')
     ])
     .pipe($.if('*.scss', $.rubySass({
       style: 'expanded',
@@ -69,8 +67,8 @@ gulp.task('assets:scss/css', function () {
 // TODO: add comments
 gulp.task('assets:jade/html', function(){
   return gulp.src([
-      'app/**/*.{html,jade}',
-      '!app/{packages,*/packages}/**'
+      path.join(APP, '**/*.{html,jade}'),
+      path.join('!'+ APP, '{packages,*/packages}/**')
     ])
     .pipe($.if('*.jade', $.jade({pretty: true})))
     .on('error', console.error.bind(console))
@@ -81,8 +79,10 @@ gulp.task('assets:jade/html', function(){
 // TODO: add comments
 gulp.task('assets:copy', function(){
   return gulp.src([
-      'app/pubspec.yaml',
-      'app/pubspec.lock'
+      path.join(APP, 'pubspec.yaml'),
+      path.join(APP, 'pubspec.lock'),
+      path.join(APP, 'build.dart')
+
     ])
     .pipe(gulp.dest(DEST))
     .pipe($.size({title: 'assets:copy'}))

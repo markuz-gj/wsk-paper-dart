@@ -37,12 +37,11 @@ var DEST = path.join(TMP, path.basename(WEB))
 function tester (vfs) {
   var file = path.relative(ROOT,vfs.path)
 
-  if (file === 'app/pubspec.yaml') return true
-  if (file === 'app/pubspec.lock') return true
-  if (file === 'app/build.dart') return true
+  if (file === path.join(APP, 'pubspec.yaml')) return true
+  if (file === path.join(APP, 'pubspec.lock')) return true
+  if (file === path.join(APP, 'build.dart')) return true
 
   return false
-
 }
 
 // TODO: add comments
@@ -54,12 +53,12 @@ gulp.task('build', function(cb){
 gulp.task('build:pre', function(){
   // TODO: use the TMP and APP vars
   return gulp.src([
-    'app/**/*.{js,dart,map,jpg,jpeg,png,svg}',
-    '.tmp/app/**/*.{html,css,js,map}',
-    'app/pubspec.yaml',
-    'app/pubspec.lock',
-    'app/build.dart',
-    '!app/{packages,*/packages}/**'], {dot:true})
+    path.join(APP, '**/*.{js,dart,map,jpg,jpeg,png,svg}'),
+    path.join(TMP, path.basename(APP), '**/*.{html,css,js,map}'),
+    path.join(APP, 'pubspec.yaml'),
+    path.join(APP, 'pubspec.lock'),
+    path.join(APP, 'build.dart'),
+    path.join('!'+ APP, '{packages,*/packages}/**')], {dot:true})
   .pipe($.if(tester, gulp.dest(TMP), gulp.dest(DEST)))
   .pipe($.size({title: 'build:pre'}))
 })
