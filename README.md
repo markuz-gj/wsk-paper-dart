@@ -32,6 +32,9 @@ Let's check to see if you already have Dart installed. Bring up a terminal and t
 
 You may have make sure `dart`, `dart2js` and `pub` are accessible in you `$PATH`. And that [Dartium](https://www.dartlang.org/tools/dartium/) is installed.
 
+There is a bug Polymer.dart and this [monkey patch](https://code.google.com/p/dart/issues/detail?id=20280#c7) appears to work. 
+
+
 ### Node
 
 Let's check to see if you already have Node installed. Bring up a terminal and type `node --version`. If Node responds, and if it shows a version at or above v0.10.x, proceed to checking if you have Ruby installed too. If you require Node, go to [nodejs.org](http://nodejs.org/) and click on the big green Install button.
